@@ -15,6 +15,7 @@ extern "C" {
     void start_isr_controllers(void);
     void start_keyboard(void);
     void display_prompt(void);
+    void start_pit(void);
     char scancode_to_ascii(uint8_t scancode);
     int printf(const char* fmt, ...);
     // Add these declarations if they're defined in your C code
@@ -30,57 +31,44 @@ void operator delete[](void* ptr) noexcept { free(ptr); }
 void operator delete(void* ptr, unsigned long) noexcept { free(ptr); }
 void operator delete[](void* ptr, unsigned long) noexcept { free(ptr); }
 
-// Add a test function to verify keyboard IRQ is working
-extern "C" void test_key_press(registers* regs, void* context) {
-    printf("Key pressed!\n");
-}
-
 extern "C" int kernel_main(void) {
     printf("Booting C++ kernel...\n");
     
-    // Initialize the essential parts
+    // 1. Initialize GDT
+    init_gdt();
+    printf("GDT initialized\n");
+    
+    // 2. Initialize IDT
     start_idt();
     printf("IDT initialized\n");
     
+    // 3. Initialize IRQ system
     start_irq();
-    printf("IRQ initialized\n");
+    printf("IRQ system initialized\n");
     
+
+    // 4. Initialize ISR handlers
     start_isr_controllers();
-    printf("ISRs initialized\n");
-    
-    // Debug keyboard initialization
+    printf("ISR handlers initialized\n");
+
+    // 5. Initialize PIT
+    start_pit();
+
+    // 6. Initialize keyboard
     printf("Starting keyboard initialization...\n");
-    
-    // If you have access to register_interrupt_handler, try registering our test handler
-    // Keyboard IRQ is typically IRQ 1 (which maps to interrupt 33 in protected mode)
-    printf("Registering test keyboard handler...\n");
-    load_interrupt_controller(33, test_key_press, nullptr);
     start_keyboard();
     printf("Keyboard initialized\n");
     
-    // Make sure interrupts are enabled
+    // 7. Enable interrupts globally
     asm volatile("sti");
     printf("Interrupts enabled\n");
-    
-    // Print some debug info
-    printf("System ready. Try typing. If no input appears, check the following:\n");
-    printf("1. IRQ routing correctly set up\n");
-    printf("2. Keyboard handler properly registered\n");
-    printf("3. Terminal input buffer properly initialized\n");
     
     // Prompt
     printf("Ready. Type something below:\n");
     display_prompt();
     
-    // Main loop with some debugging
-    uint32_t counter = 0;
+    // Main loop
     while (true) {
-        // Print a heartbeat message every ~5 seconds to verify system is alive
-        counter++;
-        if (counter % 5000000 == 0) {
-            printf("System heartbeat - still running...\n");
-        }
-        
         asm volatile("hlt");
     }
     

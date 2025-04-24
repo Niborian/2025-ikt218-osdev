@@ -54,6 +54,8 @@ static void scroll()
     }
 }
 
+
+
 static void move_cursor()
 {
     uint16_t pos = terminal_row * 80 + terminal_column;
@@ -87,6 +89,14 @@ void monitor_initialize(void)
 	}
 }
  
+void monitor_backspace() {
+    if (terminal_column > 0) {
+        terminal_column--;
+        monitor_putentryat(' ', terminal_color, terminal_column, terminal_row);
+        move_cursor();
+    }
+}
+
 void monitor_setcolor(uint8_t color) 
 {
 	terminal_color = color;

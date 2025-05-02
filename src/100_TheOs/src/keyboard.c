@@ -344,13 +344,13 @@ if (strcmp(cmd, "help") == 0) {
           // Placeholders for system information
           // Will be implemented after Pit and Memory support
           int uptime_seconds = 0;
-          int memory_used = 0;
+          int memory_used = get_memory_used();
 
           // Display system information
           terminal_printf("System Information\n");
           terminal_printf("------------------\n");
-          terminal_printf("OS Name: myOS\n");
-          terminal_printf("Version: 0.1\n");
+          terminal_printf("OS Name: The...OS\n");
+          terminal_printf("Version: 0.2\n");
           terminal_printf("Architecture: x86 (32-bit)\n");
           terminal_printf("Uptime: %d seconds\n", uptime_seconds);
           terminal_printf("Commands executed: %d\n", command_count);

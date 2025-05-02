@@ -45,6 +45,9 @@ void print_memory_layout()
     printf("Page-Aligned Heap: 0x%x – 0x%x\n", pheap_begin, pheap_end);
 }
 
+uint32_t get_memory_used(void) {
+    return memory_used;
+}
 void* malloc(size_t size)
 {
     if (!size) return 0;

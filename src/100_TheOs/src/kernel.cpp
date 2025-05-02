@@ -15,7 +15,7 @@ extern "C" {
     void start_isr_controllers(void);
     void start_keyboard(void);
     void display_prompt(void);
-    void start_pit(void);
+    void init_pit(void);
     char scancode_to_ascii(uint8_t scancode);
     int printf(const char* fmt, ...);
     // Add these declarations if they're defined in your C code
@@ -52,7 +52,7 @@ extern "C" int kernel_main(void) {
     printf("ISR handlers initialized\n");
 
     // 5. Initialize PIT
-    start_pit();
+    init_pit();
 
     // 6. Initialize keyboard
     printf("Starting keyboard initialization...\n");
@@ -62,7 +62,8 @@ extern "C" int kernel_main(void) {
     // 7. Enable interrupts globally
     asm volatile("sti");
     printf("Interrupts enabled\n");
-    
+
+
     // Prompt
     printf("Ready. Type something below:\n");
     display_prompt();

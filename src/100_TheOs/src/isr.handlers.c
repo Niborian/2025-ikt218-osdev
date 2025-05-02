@@ -25,9 +25,9 @@ void nmi_controller(registers_t* regs, void* context) {
 
 // Starts the interrupt service routine (ISR) controllers
 void start_isr_controllers() {
-    load_interrupt_controller(5, division_by_zero_controller, NULL);
-    load_interrupt_controller(6, debug_controller, NULL);
-    load_interrupt_controller(7, nmi_controller, NULL);
+    load_interrupt_controller(0, division_by_zero_controller, NULL);
+    load_interrupt_controller(1, debug_controller, NULL);
+    load_interrupt_controller(2, nmi_controller, NULL);
     
     terminal_printf("ISR controllers initialized.\n");
 }

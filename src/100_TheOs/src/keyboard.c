@@ -350,7 +350,7 @@ if (strcmp(cmd, "help") == 0) {
           terminal_printf("System Information\n");
           terminal_printf("------------------\n");
           terminal_printf("OS Name: The...OS\n");
-          terminal_printf("Version: 0.2\n");
+          terminal_printf("Version: 0.4\n");
           terminal_printf("Architecture: x86 (32-bit)\n");
           terminal_printf("Uptime: %d seconds\n", uptime_seconds);
           terminal_printf("Commands executed: %d\n", command_count);
@@ -368,8 +368,8 @@ if (strcmp(cmd, "help") == 0) {
           
           // Match the song name and play the appropriate song
           if (strcmp(song_name, "mario") == 0) {
-              temp_song.notes = music_1;
-              temp_song.length = sizeof(music_1) / sizeof(Note);
+              temp_song.notes = mario_theme;
+              temp_song.length = sizeof(mario_theme) / sizeof(Note);
               play_song_impl(&temp_song);
           }
           else if (strcmp(song_name, "starwars") == 0) {
@@ -382,42 +382,60 @@ if (strcmp(cmd, "help") == 0) {
               temp_song.length = sizeof(battlefield_1942_theme) / sizeof(Note);
               play_song_impl(&temp_song);
           }
-          else if (strcmp(song_name, "nyan") == 0) {
-              temp_song.notes = music_2;
-              temp_song.length = sizeof(music_2) / sizeof(Note);
-              play_song_impl(&temp_song);
-          }
           else if (strcmp(song_name, "twinkle") == 0) {
-              temp_song.notes = music_3;
-              temp_song.length = sizeof(music_3) / sizeof(Note);
+              temp_song.notes = twinkle_twinkle;
+              temp_song.length = sizeof(twinkle_twinkle) / sizeof(Note);
               play_song_impl(&temp_song);
           }
-          else if (strcmp(song_name, "happy") == 0) {
-              temp_song.notes = music_4;
-              temp_song.length = sizeof(music_4) / sizeof(Note);
+          else if (strcmp(song_name, "takeonme") == 0) {
+              temp_song.notes = take_on_me;
+              temp_song.length = sizeof(take_on_me) / sizeof(Note);
+              play_song_impl(&temp_song);
+          }
+          else if (strcmp(song_name, "odetojoy") == 0) {
+              temp_song.notes = ode_to_joy;
+              temp_song.length = sizeof(ode_to_joy) / sizeof(Note);
               play_song_impl(&temp_song);
           }
           else if (strcmp(song_name, "tetris") == 0) {
-              temp_song.notes = music_5;
-              temp_song.length = sizeof(music_5) / sizeof(Note);
+              temp_song.notes = tetris_theme;
+              temp_song.length = sizeof(tetris_theme) / sizeof(Note);
               play_song_impl(&temp_song);
           }
-          else if (strcmp(song_name, "imperial") == 0) {
-              temp_song.notes = music_6;
-              temp_song.length = sizeof(music_6) / sizeof(Note);
+          else if (strcmp(song_name, "zelda") == 0) {
+              temp_song.notes = zelda_theme;
+              temp_song.length = sizeof(zelda_theme) / sizeof(Note);
               play_song_impl(&temp_song);
+          }
+          else if (strcmp(song_name, "castlevania") == 0) {
+               temp_song.notes = castlevania_theme;
+               temp_song.length = sizeof(castlevania_theme) / sizeof(Note);
+               play_song_impl(&temp_song);
+          }
+          else if (strcmp(song_name, "hip-hop") == 0) {
+               temp_song.notes = hiphop_melody;
+               temp_song.length = sizeof(hiphop_melody) / sizeof(Note);
+               play_song_impl(&temp_song);
+          }
+          else if (strcmp(song_name, "mario-underworld") == 0) {
+               temp_song.notes = mario_underworld;
+               temp_song.length = sizeof(mario_underworld) / sizeof(Note);
+               play_song_impl(&temp_song);
           }
           else if (strcmp(song_name, "list") == 0) {
               // List all available songs
               terminal_printf("Available songs:\n");
-              terminal_printf("  mario     - Super Mario Bros theme\n");
-              terminal_printf("  starwars  - Star Wars theme\n");
-              terminal_printf("  battlefield - Battlefield 1942 theme\n");
-              terminal_printf("  nyan      - Nyan Cat theme\n");
-              terminal_printf("  twinkle   - Twinkle Twinkle Little Star\n");
-              terminal_printf("  happy     - Happy Birthday\n");
-              terminal_printf("  tetris    - Tetris theme\n");
-              terminal_printf("  imperial  - Star Wars Imperial March\n");
+              terminal_printf("  mario            - Super Mario Bros theme\n");
+              terminal_printf("  starwars         - Star Wars theme\n");
+              terminal_printf("  battlefield      - Battlefield 1942 theme\n");
+              terminal_printf("  twinkle          - Twinkle Twinkle Little Star\n");
+              terminal_printf("  takeonme         - Take On Me\n");
+              terminal_printf("  odetojoy         - Ode to Joy\n");
+              terminal_printf("  tetris           - Tetris theme\n");
+              terminal_printf("  zelda            - Zelda theme\n");
+              terminal_printf("  castlevania      - Castlevania theme\n");
+              terminal_printf("  hip-hop          - Hip-hop inspired rhythm pattern\n");
+              terminal_printf("  mario-underworld - Super Mario Bros Underworld theme\n");
           }
           else {
               terminal_printf("Unknown song: %s\n", song_name);
